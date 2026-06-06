@@ -1,0 +1,2409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Viraj weds Devaki · 5 July 2026</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Bebas+Neue&family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        :root {
+            --red: #cc2b2b;
+            --gold: #e8a020;
+            --teal: #1a7a6e;
+            --indigo: #2d3580;
+            --cream: #fef9f0;
+            --dark: #1a0e06;
+            --ink: #1c1208;
+            --sangeet: #7c2dbd;
+            --sangeet2: #e040fb;
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            background: #0f0a04;
+            color: var(--ink);
+            font-family: 'Lora', serif;
+            overflow-x: hidden;
+            cursor: none
+        }
+
+        /* Cursor */
+        #cursor {
+            position: fixed;
+            width: 16px;
+            height: 16px;
+            background: var(--gold);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference;
+            transition: width .2s, height .2s
+        }
+
+        #cursor-trail {
+            position: fixed;
+            width: 32px;
+            height: 32px;
+            border: 1.5px solid rgba(232, 160, 32, .4);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: left .1s, top .1s
+        }
+
+        @keyframes sparkOut {
+            from {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1)
+            }
+
+            to {
+                opacity: 0;
+                transform: translate(-50%, -80px) scale(0)
+            }
+        }
+
+        /* Petals */
+        .petal {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+            animation: petalFall linear infinite
+        }
+
+        @keyframes petalFall {
+            0% {
+                opacity: .9;
+                transform: translateY(-60px) rotate(0deg)
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(110vh) rotate(720deg)
+            }
+        }
+
+        /* ══════════ ENVELOPE ══════════ */
+        #envelope-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: radial-gradient(ellipse 80% 80% at 50% 50%, #1a0e06, #060302);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        #env-hint {
+            position: absolute;
+            bottom: 48px;
+            font-family: 'Bebas Neue';
+            letter-spacing: .28em;
+            font-size: .78rem;
+            color: rgba(232, 160, 32, .6);
+            animation: hint 2s ease-in-out infinite
+        }
+
+        @keyframes hint {
+
+            0%,
+            100% {
+                opacity: .3;
+                transform: translateY(0)
+            }
+
+            50% {
+                opacity: 1;
+                transform: translateY(-4px)
+            }
+        }
+
+        .env-fp {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: efp linear infinite;
+            opacity: .7
+        }
+
+        @keyframes efp {
+            0% {
+                opacity: .8;
+                transform: translateY(-40px) rotate(0)
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(540deg)
+            }
+        }
+
+        #env-wrap {
+            position: relative;
+            width: 320px;
+            height: 220px;
+            cursor: pointer;
+            animation: breathe 3s ease-in-out infinite
+        }
+
+        @keyframes breathe {
+
+            0%,
+            100% {
+                transform: scale(1) translateY(0)
+            }
+
+            50% {
+                transform: scale(1.012) translateY(-5px)
+            }
+        }
+
+        #env-body {
+            position: absolute;
+            inset: 0;
+            border-radius: 4px 4px 8px 8px;
+            background: linear-gradient(145deg, #fdf3e0, #f0d898);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, .7), 0 0 0 1px rgba(232, 160, 32, .3);
+            overflow: hidden;
+        }
+
+        #env-body::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(232, 160, 32, .04) 2px, rgba(232, 160, 32, .04) 4px)
+        }
+
+        .env-border {
+            position: absolute;
+            inset: 8px;
+            border: 1.5px solid var(--gold);
+            border-radius: 3px;
+            box-shadow: inset 0 0 12px rgba(232, 160, 32, .15)
+        }
+
+        .enc {
+            position: absolute;
+            font-size: 1rem
+        }
+
+        .enc.tl {
+            top: 14px;
+            left: 14px
+        }
+
+        .enc.tr {
+            top: 14px;
+            right: 14px
+        }
+
+        .enc.bl {
+            bottom: 14px;
+            left: 14px
+        }
+
+        .enc.br {
+            bottom: 14px;
+            right: 14px
+        }
+
+        #env-bv {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 110px;
+            background: linear-gradient(to top, #e8cb88, #f0d898);
+            clip-path: polygon(0 100%, 50% 0, 100% 100%)
+        }
+
+        #env-rv {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 160px;
+            background: linear-gradient(to left, #eedba0, #f5e6c0);
+            clip-path: polygon(100% 0, 0 50%, 100% 100%)
+        }
+
+        #env-lv {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 160px;
+            background: linear-gradient(to right, #eedba0, #f5e6c0);
+            clip-path: polygon(0 0, 100% 50%, 0 100%)
+        }
+
+        #env-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 120px;
+            background: linear-gradient(180deg, #f5e0b8, #eedba0);
+            clip-path: polygon(0 0, 50% 100%, 100% 0);
+            transform-origin: top;
+            z-index: 10;
+            transition: transform .8s cubic-bezier(.4, 0, .2, 1)
+        }
+
+        #env-flap.open {
+            transform: rotateX(-180deg)
+        }
+
+        #wax-seal {
+            position: absolute;
+            top: 96px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, #cc2b2b 60%, #8b1a1a);
+            border-radius: 50%;
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px rgba(204, 43, 43, .6)
+        }
+
+        #env-mono {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Abril Fatface';
+            font-size: 2.2rem;
+            color: var(--gold);
+            z-index: 5;
+            pointer-events: none;
+            text-shadow: 0 2px 8px rgba(232, 160, 32, .4)
+        }
+
+        #env-card {
+            position: absolute;
+            bottom: -8px;
+            left: 18px;
+            right: 18px;
+            height: 200px;
+            background: var(--cream);
+            border-radius: 4px;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, .3);
+            z-index: 8;
+            transition: transform 1s cubic-bezier(.2, .8, .3, 1);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        #env-card.up {
+            transform: translateY(-270px)
+        }
+
+        #env-card span {
+            font-family: 'Abril Fatface';
+            font-size: 1.3rem;
+            color: var(--red)
+        }
+
+        /* ══════════ CELEBRATION ══════════ */
+        #celebration {
+            position: fixed;
+            inset: 0;
+            z-index: 90;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0
+        }
+
+        #inv-txt {
+            font-family: 'Bebas Neue';
+            font-size: clamp(2.5rem, 9vw, 6rem);
+            letter-spacing: .15em;
+            color: #fff;
+            text-shadow: 0 0 40px var(--gold);
+            opacity: 0;
+            transform: scale(.5)
+        }
+
+        .conf {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            pointer-events: none;
+            border-radius: 2px
+        }
+
+        /* ══════════ SITE ══════════ */
+        #main-site {
+            opacity: 0;
+            pointer-events: none
+        }
+
+        #main-site.active {
+            opacity: 1;
+            pointer-events: all
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            padding: 14px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(10, 5, 2, .88);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(232, 160, 32, .1);
+            transform: translateY(-100%);
+            transition: transform .5s
+        }
+
+        nav.show {
+            transform: translateY(0)
+        }
+
+        .nav-logo {
+            font-family: 'Abril Fatface';
+            font-size: 1.2rem;
+            color: var(--gold)
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px
+        }
+
+        .nav-links a {
+            font-family: 'Bebas Neue';
+            font-size: .72rem;
+            letter-spacing: .22em;
+            color: rgba(255, 255, 255, .65);
+            text-decoration: none;
+            transition: color .2s
+        }
+
+        .nav-links a:hover {
+            color: var(--gold)
+        }
+
+        /* Music */
+        #mp {
+            position: fixed;
+            bottom: 24px;
+            right: 20px;
+            z-index: 60;
+            background: rgba(15, 10, 4, .92);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(232, 160, 32, .25);
+            border-radius: 50px;
+            padding: 9px 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, .5);
+            transform: translateY(100px);
+            transition: transform .5s .8s
+        }
+
+        #mp.show {
+            transform: translateY(0)
+        }
+
+        #pbtn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold), var(--red));
+            border: none;
+            cursor: pointer;
+            color: #fff;
+            font-size: .9rem;
+            transition: transform .2s
+        }
+
+        #pbtn:hover {
+            transform: scale(1.1)
+        }
+
+        .vinyl {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #333 0%, #111 100%);
+            border: 2px solid rgba(232, 160, 32, .4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: spin 3s linear infinite paused
+        }
+
+        .vinyl.on {
+            animation-play-state: running
+        }
+
+        .vinyl::after {
+            content: '';
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--gold);
+            display: block
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        .eqb {
+            display: flex;
+            gap: 2px;
+            align-items: flex-end;
+            height: 18px
+        }
+
+        .eqb div {
+            width: 3px;
+            border-radius: 2px;
+            animation: eq .6s ease-in-out infinite alternate paused
+        }
+
+        .eqb div:nth-child(1) {
+            background: var(--teal)
+        }
+
+        .eqb div:nth-child(2) {
+            background: var(--gold);
+            animation-delay: .1s
+        }
+
+        .eqb div:nth-child(3) {
+            background: var(--red);
+            animation-delay: .2s
+        }
+
+        .eqb div:nth-child(4) {
+            background: var(--indigo);
+            animation-delay: .3s
+        }
+
+        .eqb div.on {
+            animation-play-state: running
+        }
+
+        @keyframes eq {
+            from {
+                height: 3px
+            }
+
+            to {
+                height: 14px
+            }
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 100px 24px 80px
+        }
+
+        /* ── HERO ── */
+        #hero {
+            background: radial-gradient(ellipse 80% 60% at 50% 40%, #1a0a04, #0a0503)
+        }
+
+        .hero-bless {
+            font-size: .76rem;
+            letter-spacing: .04em;
+            color: var(--gold);
+            opacity: .75;
+            margin-bottom: 28px;
+            text-align: center;
+            line-height: 2.2
+        }
+
+        .h-names {
+            text-align: center;
+            position: relative;
+            z-index: 2
+        }
+
+        .nm {
+            font-family: 'Abril Fatface';
+            font-size: clamp(3.5rem, 13vw, 8.5rem);
+            line-height: .92;
+            display: block;
+            overflow: hidden
+        }
+
+        .nm.g {
+            color: var(--red);
+            text-shadow: 0 0 60px rgba(204, 43, 43, .4)
+        }
+
+        .nm.b {
+            color: var(--indigo);
+            text-shadow: 0 0 60px rgba(45, 53, 128, .4)
+        }
+
+        .nc {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(100%)
+        }
+
+        .heart-big {
+            font-size: 2.2rem;
+            margin: 14px 0;
+            display: block;
+            animation: hb 1.5s ease-in-out infinite;
+            opacity: 0
+        }
+
+        @keyframes hb {
+
+            0%,
+            100% {
+                transform: scale(1)
+            }
+
+            30% {
+                transform: scale(1.2)
+            }
+
+            60% {
+                transform: scale(1.08)
+            }
+        }
+
+        .weds-pill {
+            display: inline-block;
+            background: var(--gold);
+            color: #fff;
+            font-family: 'Bebas Neue';
+            letter-spacing: .2em;
+            font-size: .9rem;
+            padding: 4px 22px;
+            border-radius: 100px;
+            margin: 16px 0;
+            box-shadow: 0 4px 20px rgba(232, 160, 32, .5);
+            opacity: 0
+        }
+
+        .div-line {
+            width: 100px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 20px auto
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Bebas Neue';
+            letter-spacing: .2em;
+            font-size: .62rem;
+            color: rgba(232, 160, 32, .5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            animation: sb 2s ease-in-out infinite
+        }
+
+        @keyframes sb {
+
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0)
+            }
+
+            50% {
+                transform: translateX(-50%) translateY(6px)
+            }
+        }
+
+        /* ── SANGEET HERO ── */
+        #sangeet-hero {
+            background: linear-gradient(180deg, #0a0503 0%, #110822 50%, #0a0503 100%);
+            position: relative;
+        }
+
+        .sangeet-glow {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(124, 45, 189, .25), transparent 70%);
+            pointer-events: none;
+            animation: glowPulse 3s ease-in-out infinite
+        }
+
+        @keyframes glowPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: .6
+            }
+
+            50% {
+                transform: scale(1.15);
+                opacity: 1
+            }
+        }
+
+        .s-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, rgba(124, 45, 189, .3), rgba(224, 64, 251, .2));
+            border: 1px solid rgba(224, 64, 251, .4);
+            border-radius: 100px;
+            padding: 6px 18px;
+            font-family: 'Bebas Neue';
+            letter-spacing: .2em;
+            font-size: .72rem;
+            color: #e040fb;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(224, 64, 251, .2);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .s-main-title {
+            font-family: 'Bebas Neue';
+            font-size: clamp(3rem, 12vw, 8rem);
+            letter-spacing: .06em;
+            text-align: center;
+            line-height: .9;
+            background: linear-gradient(135deg, #e040fb, #7c2dbd, #e8a020);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 30px rgba(224, 64, 251, .4));
+            opacity: 0;
+            transform: scale(.8);
+        }
+
+        .s-date-big {
+            font-family: 'Abril Fatface';
+            font-size: clamp(5rem, 18vw, 12rem);
+            color: #e040fb;
+            line-height: .85;
+            text-shadow: 0 0 60px rgba(224, 64, 251, .6), 0 0 120px rgba(124, 45, 189, .3);
+            opacity: 0;
+            transform: scale(.7);
+        }
+
+        .s-month {
+            font-family: 'Bebas Neue';
+            font-size: clamp(2rem, 7vw, 4.5rem);
+            letter-spacing: .15em;
+            color: var(--gold);
+            opacity: 0;
+            transform: translateX(-30px)
+        }
+
+        .s-detail {
+            font-family: 'DM Sans';
+            font-weight: 300;
+            font-size: .9rem;
+            letter-spacing: .12em;
+            color: rgba(255, 255, 255, .55);
+            margin-top: 8px;
+            opacity: 0
+        }
+
+        /* Disco ball */
+        .disco {
+            font-size: 3rem;
+            animation: discospin 2s linear infinite;
+            display: inline-block;
+            margin-bottom: 12px;
+            opacity: 0
+        }
+
+        @keyframes discospin {
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        /* Countdown to SANGEET specifically */
+        .countdown-label-sangeet {
+            font-family: 'Bebas Neue';
+            letter-spacing: .25em;
+            font-size: .68rem;
+            color: #e040fb;
+            margin-bottom: 14px;
+            margin-top: 28px;
+            display: block;
+            opacity: 0;
+        }
+
+        .sgrid {
+            display: flex;
+            gap: clamp(10px, 2.5vw, 20px);
+            flex-wrap: wrap;
+            justify-content: center
+        }
+
+        .sc {
+            background: rgba(124, 45, 189, .12);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(224, 64, 251, .25);
+            border-radius: 14px;
+            padding: 18px 22px;
+            text-align: center;
+            min-width: 72px;
+            box-shadow: 0 0 24px rgba(124, 45, 189, .15);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .sc-num {
+            font-family: 'Bebas Neue';
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            color: #e040fb;
+            line-height: 1;
+            text-shadow: 0 0 16px rgba(224, 64, 251, .7)
+        }
+
+        .sc-lbl {
+            font-family: 'DM Sans';
+            font-weight: 300;
+            font-size: .62rem;
+            letter-spacing: .2em;
+            color: rgba(255, 255, 255, .4);
+            margin-top: 3px
+        }
+
+        /* Song vote */
+        #song-vote {
+            margin-top: 32px;
+            background: rgba(124, 45, 189, .1);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(224, 64, 251, .2);
+            border-radius: 20px;
+            padding: 28px 32px;
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .sv-title {
+            font-family: 'Bebas Neue';
+            font-size: 1.1rem;
+            letter-spacing: .18em;
+            color: #e040fb;
+            margin-bottom: 16px
+        }
+
+        .sv-songs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 16px
+        }
+
+        .sv-song {
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, .08);
+            font-family: 'DM Sans';
+            font-size: .8rem;
+            color: rgba(255, 255, 255, .7);
+            cursor: pointer;
+            transition: all .25s;
+            background: rgba(255, 255, 255, .03);
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sv-song:hover {
+            border-color: rgba(224, 64, 251, .4);
+            color: #e040fb;
+            background: rgba(124, 45, 189, .12)
+        }
+
+        .sv-song.voted {
+            border-color: #e040fb;
+            color: #e040fb;
+            background: rgba(124, 45, 189, .2)
+        }
+
+        .sv-song .sv-icon {
+            font-size: 1.2rem
+        }
+
+        .sv-bar {
+            height: 4px;
+            border-radius: 2px;
+            background: rgba(255, 255, 255, .08);
+            margin-top: 6px;
+            overflow: hidden
+        }
+
+        .sv-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #7c2dbd, #e040fb);
+            border-radius: 2px;
+            width: 0;
+            transition: width .8s ease
+        }
+
+        .sv-votes {
+            font-size: .68rem;
+            color: rgba(255, 255, 255, .3);
+            margin-top: 2px
+        }
+
+        .sv-note {
+            font-family: 'Lora';
+            font-style: italic;
+            font-size: .76rem;
+            color: rgba(255, 255, 255, .35);
+            margin-top: 10px
+        }
+
+        /* Dance challenge */
+        #dance-challenge {
+            margin-top: 24px;
+            background: rgba(26, 122, 110, .08);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(26, 122, 110, .25);
+            border-radius: 20px;
+            padding: 24px 28px;
+            max-width: 480px;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .dc-title {
+            font-family: 'Bebas Neue';
+            font-size: 1rem;
+            letter-spacing: .18em;
+            color: var(--teal);
+            margin-bottom: 12px
+        }
+
+        .dc-moves {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 14px
+        }
+
+        .dc-move {
+            padding: 8px 14px;
+            border-radius: 100px;
+            border: 1px solid rgba(26, 122, 110, .3);
+            font-family: 'DM Sans';
+            font-size: .8rem;
+            color: rgba(255, 255, 255, .6);
+            cursor: pointer;
+            transition: all .25s;
+            background: rgba(255, 255, 255, .03);
+        }
+
+        .dc-move:hover,
+        .dc-move.picked {
+            border-color: var(--teal);
+            color: var(--teal);
+            background: rgba(26, 122, 110, .12)
+        }
+
+        #dc-result {
+            font-family: 'Lora';
+            font-style: italic;
+            font-size: .84rem;
+            color: rgba(255, 255, 255, .5);
+            min-height: 28px;
+            transition: all .3s
+        }
+
+        /* ── EVENTS TIMELINE ── */
+        #events-section {
+            background: linear-gradient(180deg, #0a0503, #0f0a04)
+        }
+
+        .sec-title {
+            font-family: 'Bebas Neue';
+            font-size: clamp(1.8rem, 6vw, 3.5rem);
+            letter-spacing: .12em;
+            text-align: center;
+            background: linear-gradient(135deg, var(--gold), var(--red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 6px;
+            opacity: 0;
+            transform: translateY(28px)
+        }
+
+        .sec-sub {
+            font-family: 'Lora';
+            font-style: italic;
+            font-size: .88rem;
+            color: rgba(255, 255, 255, .45);
+            text-align: center;
+            margin-bottom: 36px;
+            opacity: 0;
+            transform: translateY(18px)
+        }
+
+        .tl {
+            position: relative;
+            max-width: 580px;
+            width: 100%
+        }
+
+        .tl-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--sangeet2), var(--gold), var(--red));
+            transform: translateX(-50%) scaleY(0);
+            transform-origin: top
+        }
+
+        .tev {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 44px;
+            opacity: 0;
+            transform: translateX(-40px)
+        }
+
+        .tev:nth-child(even) {
+            flex-direction: row-reverse;
+            transform: translateX(40px)
+        }
+
+        .tev-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 2;
+            transition: transform .3s, box-shadow .3s;
+            cursor: pointer;
+            border: 2px solid
+        }
+
+        .tev-icon:hover {
+            transform: scale(1.15)
+        }
+
+        .tev-card {
+            flex: 1;
+            background: rgba(255, 255, 255, .04);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, .07);
+            border-radius: 16px;
+            padding: 18px 20px;
+            cursor: pointer;
+            transition: transform .3s, box-shadow .3s
+        }
+
+        .tev-card:hover {
+            transform: translateY(-4px) rotate(.4deg)
+        }
+
+        .tev-dt {
+            font-family: 'Bebas Neue';
+            letter-spacing: .2em;
+            font-size: .62rem;
+            margin-bottom: 5px
+        }
+
+        .tev-nm {
+            font-family: 'Bebas Neue';
+            font-size: 1.3rem;
+            letter-spacing: .1em;
+            line-height: 1;
+            margin-bottom: 5px
+        }
+
+        .tev-tm {
+            font-family: 'DM Sans';
+            font-weight: 300;
+            font-size: .8rem;
+            color: rgba(255, 255, 255, .55)
+        }
+
+        .tev-note {
+            font-family: 'Lora';
+            font-style: italic;
+            font-size: .74rem;
+            color: rgba(255, 255, 255, .4);
+            margin-top: 6px;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height .4s, opacity .4s
+        }
+
+        .tev-card.open .tev-note {
+            max-height: 80px;
+            opacity: 1
+        }
+
+        .tev-tap {
+            font-family: 'Lora';
+            font-style: italic;
+            font-size: .7rem;
+            color: rgba(255, 255, 255, .25);
+            text-align: center;
+            margin-top: 4px
+        }
+
+        /* ── FUN QUIZ ── */
+        #quiz-section {
+            background: #0f0a04
+        }
+
+        .quiz-box {
+            max-width: 500px;
+            width: 100%;
+            background: rgba(255, 255, 255, .04);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(232, 160, 32, .15);
+            border-radius: 24px;
+            padding: 36px clamp(20px, 5vw, 44px);
+            opacity: 0;
+            transform: translateY(50px)
+        }
+
+        .q-step {
+            display: none
+        }
+
+        .q-step.active {
+            display: block
+        }
+
+        .q-num {
+            font-family: 'Bebas Neue';
+            letter-spacing: .22em;
+            font-size: .65rem;
+            color: var(--teal);
+            margin-bottom: 14px
+        }
+
+        .q-text {
+            font-family: 'Abril Fatface';
+            font-size: 1.3rem;
+            color: #fff;
+            line-height: 1.35;
+            margin-bottom: 24px
+        }
+
+        .q-opts {
+            display: grid;
+            gap: 10px
+        }
+
+        .q-opt {
+            padding: 13px 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, .08);
+            color: rgba(255, 255, 255, .7);
+            font-family: 'DM Sans';
+            font-size: .88rem;
+            cursor: pointer;
+            transition: all .25s;
+            text-align: left;
+            background: transparent;
+            width: 100%
+        }
+
+        .q-opt:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            background: rgba(232, 160, 32, .06)
+        }
+
+        .q-opt.correct {
+            border-color: var(--teal) !important;
+            color: var(--teal) !important;
+            background: rgba(26, 122, 110, .1) !important
+        }
+
+        .q-opt.wrong {
+            border-color: var(--red) !important;
+            color: var(--red) !important;
+            background: rgba(204, 43, 43, .08) !important
+        }
+
+        .q-feedback {
+            font-family: 'Lora';
+            font-style: italic;
+            font-size: .82rem;
+            color: rgba(255, 255, 255, .5);
+            margin-top: 12px;
+            min-height: 24px
+        }
+
+        .q-next {
+            margin-top: 16px;
+            padding: 11px 28px;
+            border: 1px solid var(--gold);
+            background: transparent;
+            color: var(--gold);
+            font-family: 'Bebas Neue';
+            letter-spacing: .15em;
+            font-size: .82rem;
+            border-radius: 100px;
+            cursor: pointer;
+            transition: all .25s;
+            display: none
+        }
+
+        .q-next:hover {
+            background: var(--gold);
+            color: #fff
+        }
+
+        .q-score {
+            text-align: center;
+            padding: 16px 0
+        }
+
+        .q-score .big-score {
+            font-family: 'Bebas Neue';
+            font-size: 4rem;
+            color: var(--gold);
+            line-height: 1
+        }
+
+        .q-score p {
+            font-family: 'Lora';
+            font-style: italic;
+            color: rgba(255, 255, 255, .55);
+            margin-top: 8px
+        }
+
+        .q-restart {
+            margin-top: 16px;
+            padding: 11px 28px;
+            background: linear-gradient(135deg, var(--gold), var(--red));
+            border: none;
+            color: #fff;
+            font-family: 'Bebas Neue';
+            letter-spacing: .15em;
+            font-size: .82rem;
+            border-radius: 100px;
+            cursor: pointer
+        }
+
+        /* ── WISH WALL ── */
+        #wish-section {
+            background: linear-gradient(180deg, #0a0503, #0f0a04)
+        }
+
+        .wish-input-wrap {
+            max-width: 520px;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(40px)
+        }
+
+        .wish-name-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px
+        }
+
+        .wish-field {
+            flex: 1;
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: 12px;
+            padding: 13px 16px;
+            color: #fff;
+            font-family: 'DM Sans';
+            font-size: .88rem;
+            outline: none;
+            transition: border-color .3s
+        }
+
+        .wish-field:focus {
+            border-color: var(--gold)
+        }
+
+        .wish-field::placeholder {
+            color: rgba(255, 255, 255, .3)
+        }
+
+        .wish-ta {
+            width: 100%;
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: 12px;
+            padding: 13px 16px;
+            color: #fff;
+            font-family: 'Lora';
+            font-size: .85rem;
+            outline: none;
+            resize: none;
+            height: 80px;
+            transition: border-color .3s;
+            margin-bottom: 12px
+        }
+
+        .wish-ta:focus {
+            border-color: var(--gold)
+        }
+
+        .wish-ta::placeholder {
+            color: rgba(255, 255, 255, .3)
+        }
+
+        .wish-submit {
+            padding: 12px 32px;
+            background: linear-gradient(135deg, var(--gold), var(--red));
+            border: none;
+            color: #fff;
+            font-family: 'Bebas Neue';
+            letter-spacing: .18em;
+            font-size: .88rem;
+            border-radius: 100px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(232, 160, 32, .3);
+            transition: transform .2s
+        }
+
+        .wish-submit:hover {
+            transform: translateY(-2px)
+        }
+
+        .wish-wall {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 14px;
+            max-width: 560px;
+            width: 100%;
+            margin-top: 28px
+        }
+
+        .wish-card {
+            background: rgba(255, 255, 255, .04);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, .07);
+            border-radius: 14px;
+            padding: 16px;
+            animation: wishPop .4s cubic-bezier(.2, .8, .3, 1) both;
+            transform: rotate(var(--rot));
+        }
+
+        @keyframes wishPop {
+            from {
+                opacity: 0;
+                transform: scale(.7) rotate(var(--rot))
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(var(--rot))
+            }
+        }
+
+        .wc-emoji {
+            font-size: 1.4rem;
+            margin-bottom: 8px
+        }
+
+        .wc-msg {
+            font-family: 'Lora';
+            font-size: .8rem;
+            color: rgba(255, 255, 255, .75);
+            line-height: 1.6;
+            margin-bottom: 8px
+        }
+
+        .wc-name {
+            font-family: 'Bebas Neue';
+            letter-spacing: .15em;
+            font-size: .65rem;
+            color: var(--gold)
+        }
+
+        /* ── RSVP ── */
+        #rsvp-section {
+            background: #0f0a04
+        }
+
+        .rsvp-wrap {
+            max-width: 500px;
+            width: 100%;
+            background: rgba(255, 255, 255, .04);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(232, 160, 32, .15);
+            border-radius: 24px;
+            padding: 36px clamp(20px, 5vw, 48px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .4);
+            opacity: 0;
+            transform: translateY(50px)
+        }
+
+        .rf {
+            position: relative;
+            margin-bottom: 20px
+        }
+
+        .ri {
+            width: 100%;
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: 12px;
+            padding: 15px 16px 7px;
+            color: #fff;
+            font-family: 'DM Sans';
+            font-size: .88rem;
+            outline: none;
+            transition: border-color .3s
+        }
+
+        .ri:focus {
+            border-color: var(--gold)
+        }
+
+        .ri::placeholder {
+            color: transparent
+        }
+
+        .rl {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: 'DM Sans';
+            font-size: .84rem;
+            color: rgba(255, 255, 255, .35);
+            transition: top .25s, font-size .25s, color .25s;
+            pointer-events: none
+        }
+
+        .ri:focus~.rl,
+        .ri:not(:placeholder-shown)~.rl {
+            top: 9px;
+            font-size: .66rem;
+            color: var(--gold);
+            transform: none
+        }
+
+        textarea.ri {
+            height: 80px;
+            padding-top: 18px;
+            resize: none
+        }
+
+        textarea.ri~.rl {
+            top: 18px;
+            transform: none
+        }
+
+        textarea.ri:focus~.rl,
+        textarea.ri:not(:placeholder-shown)~.rl {
+            top: 7px
+        }
+
+        .r-radios {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px
+        }
+
+        .r-rad {
+            flex: 1;
+            padding: 11px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, .1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-family: 'Bebas Neue';
+            letter-spacing: .1em;
+            font-size: .8rem;
+            color: rgba(255, 255, 255, .5);
+            cursor: pointer;
+            transition: all .3s
+        }
+
+        .r-rad.sel {
+            border-color: var(--gold);
+            color: var(--gold);
+            background: rgba(232, 160, 32, .07)
+        }
+
+        .r-submit {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(135deg, var(--gold), var(--red));
+            color: #fff;
+            font-family: 'Bebas Neue';
+            letter-spacing: .2em;
+            font-size: .95rem;
+            border-radius: 12px;
+            transition: transform .2s, box-shadow .2s;
+            box-shadow: 0 8px 24px rgba(232, 160, 32, .3)
+        }
+
+        .r-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(232, 160, 32, .4)
+        }
+
+        #r-thanks {
+            display: none;
+            text-align: center;
+            padding: 32px 0
+        }
+
+        #r-thanks .ti {
+            font-size: 2.5rem;
+            animation: tp .5s cubic-bezier(.2, .8, .3, 1)
+        }
+
+        @keyframes tp {
+            from {
+                transform: scale(0)
+            }
+
+            to {
+                transform: scale(1)
+            }
+        }
+
+        #r-thanks h3 {
+            font-family: 'Abril Fatface';
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-top: 14px
+        }
+
+        #r-thanks p {
+            font-family: 'Lora';
+            font-style: italic;
+            color: rgba(255, 255, 255, .5);
+            margin-top: 6px
+        }
+
+        /* ── VENUE ── */
+        #venue-section {
+            background: linear-gradient(180deg, #0a0503, #0f0a04)
+        }
+
+        .v-card {
+            max-width: 540px;
+            width: 100%;
+            background: rgba(255, 255, 255, .04);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(232, 160, 32, .15);
+            border-radius: 24px;
+            overflow: hidden;
+            opacity: 0;
+            transform: scale(.92)
+        }
+
+        .v-map {
+            height: 180px;
+            background: linear-gradient(135deg, rgba(26, 122, 110, .18), rgba(45, 53, 128, .12));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden
+        }
+
+        .v-map::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(232, 160, 32, .04) 28px, rgba(232, 160, 32, .04) 29px), repeating-linear-gradient(90deg, transparent, transparent 28px, rgba(232, 160, 32, .04) 28px, rgba(232, 160, 32, .04) 29px)
+        }
+
+        .v-pin {
+            font-size: 2.8rem;
+            cursor: pointer;
+            z-index: 1;
+            animation: pinb 1s ease-in-out infinite
+        }
+
+        @keyframes pinb {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-8px)
+            }
+        }
+
+        .v-body {
+            padding: 24px 28px
+        }
+
+        .v-name {
+            font-family: 'Bebas Neue';
+            font-size: 1.5rem;
+            letter-spacing: .1em;
+            color: var(--gold);
+            margin-bottom: 6px
+        }
+
+        .v-addr {
+            font-family: 'DM Sans';
+            font-weight: 300;
+            font-size: .8rem;
+            color: rgba(255, 255, 255, .55);
+            line-height: 1.75;
+            margin-bottom: 18px
+        }
+
+        .v-btns {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap
+        }
+
+        .v-btn {
+            padding: 9px 18px;
+            border-radius: 100px;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-family: 'Bebas Neue';
+            letter-spacing: .14em;
+            font-size: .72rem;
+            cursor: pointer;
+            background: transparent;
+            transition: all .3s;
+            text-decoration: none;
+            display: inline-flex
+        }
+
+        .v-btn:hover,
+        .v-btn.p {
+            background: var(--gold);
+            color: #fff
+        }
+
+        .v-btn.p:hover {
+            background: #d4940e
+        }
+
+        /* ── CLOSING ── */
+        #closing-section {
+            background: radial-gradient(ellipse 80% 60% at 50% 50%, #1a0a04, #060302);
+            min-height: 100vh
+        }
+
+        .cl-txt {
+            font-family: 'Bebas Neue';
+            font-size: clamp(1.3rem, 4.5vw, 2.8rem);
+            letter-spacing: .1em;
+            text-align: center;
+            color: #fff;
+            line-height: 1.45;
+            opacity: 0;
+            transform: translateY(36px);
+            text-shadow: 0 0 40px rgba(232, 160, 32, .25)
+        }
+
+        .cl-sub {
+            font-family: 'Lora';
+            font-style: italic;
+            color: rgba(255, 255, 255, .5);
+            font-size: .9rem;
+            margin-top: 14px;
+            opacity: 0
+        }
+
+        .lantern {
+            position: absolute;
+            font-size: 2rem;
+            animation: lanf linear infinite;
+            opacity: .75;
+            pointer-events: none
+        }
+
+        @keyframes lanf {
+            0% {
+                transform: translateY(100vh)
+            }
+
+            100% {
+                transform: translateY(-10vh)
+            }
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, .05);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, .07);
+            border-radius: 18px
+        }
+
+        @media(max-width:580px) {
+            #env-wrap {
+                width: 270px;
+                height: 190px
+            }
+
+            .tev,
+            .tev:nth-child(even) {
+                flex-direction: column;
+                transform: translateX(0) !important
+            }
+
+            .tl-line {
+                left: 20px
+            }
+
+            .sv-songs {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .rip {
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            border: 2px solid rgba(232, 160, 32, .4);
+            z-index: 9997;
+            animation: ripout .7s ease-out forwards
+        }
+
+        @keyframes ripout {
+            from {
+                width: 0;
+                height: 0;
+                opacity: 1;
+                transform: translate(-50%, -50%)
+            }
+
+            to {
+                width: 70px;
+                height: 70px;
+                opacity: 0;
+                transform: translate(-50%, -50%)
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="cursor"></div>
+    <div id="cursor-trail"></div>
+
+    <!-- ══════════ ENVELOPE ══════════ -->
+    <div id="envelope-screen">
+        <div class="env-fp" style="left:8%;animation-duration:6s">🌸</div>
+        <div class="env-fp" style="left:22%;animation-duration:8s;animation-delay:1s">🌺</div>
+        <div class="env-fp" style="left:44%;animation-duration:7s;animation-delay:2s">🌼</div>
+        <div class="env-fp" style="left:66%;animation-duration:9s;animation-delay:.5s">🌸</div>
+        <div class="env-fp" style="left:82%;animation-duration:6.5s;animation-delay:1.8s">🌺</div>
+
+        <div id="env-wrap" onclick="openEnv()">
+            <div id="env-body">
+                <div class="env-border"></div>
+                <div class="enc tl">🌸</div>
+                <div class="enc tr">🌺</div>
+                <div class="enc bl">🌼</div>
+                <div class="enc br">🌸</div>
+                <div id="env-bv"></div>
+                <div id="env-rv"></div>
+                <div id="env-lv"></div>
+                <div id="env-mono">V❤D</div>
+            </div>
+            <div id="env-flap"></div>
+            <div id="wax-seal">💌</div>
+            <div id="env-card"><span>Viraj &amp; Devaki</span></div>
+        </div>
+        <div id="env-hint">✦ Tap to Open ✦</div>
+    </div>
+
+    <!-- ══════════ CELEBRATION ══════════ -->
+    <div id="celebration">
+        <div id="inv-txt">YOU'RE INVITED ✨</div>
+    </div>
+
+    <!-- ══════════ MAIN ══════════ -->
+    <div id="main-site">
+
+        <nav id="nav">
+            <div class="nav-logo">V❤D</div>
+            <div class="nav-links">
+                <a href="#hero">Home</a>
+                <a href="#sangeet-hero">Sangeet</a>
+                <a href="#events-section">Events</a>
+                <a href="#quiz-section">Quiz</a>
+                <a href="#wish-section">Wishes</a>
+                <a href="#rsvp-section">RSVP</a>
+            </div>
+        </nav>
+
+        <div id="mp">
+            <button id="pbtn" onclick="toggleMusic()">▶</button>
+            <div class="vinyl" id="vinyl"></div>
+            <div class="eqb">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+
+        <!-- ── HERO ── -->
+        <section id="hero">
+            <div id="sparkles" style="position:absolute;inset:0;pointer-events:none"></div>
+            <div class="hero-bless" id="hbless">|| श्री गणेशाय नमः ||<br>श्री लक्ष्मीकेशव · श्री योगेश्वरी माता · श्री
+                विमलेश्वर प्रसन्न</div>
+            <div class="h-names">
+                <span class="nm g" id="ng"></span>
+                <span class="heart-big" id="hrt">❤️</span>
+                <span class="nm b" id="nb"></span>
+                <span class="weds-pill" id="wp">× Weds ×</span>
+            </div>
+            <div class="div-line"></div>
+            <p style="font-family:'DM Sans';font-weight:300;font-size:.84rem;letter-spacing:.14em;color:rgba(255,255,255,.4);opacity:0"
+                id="ht">Sunday, 5th July 2026 · Nashik</p>
+            <div class="scroll-hint"><span>Scroll to explore</span><span
+                    style="font-size:1rem;color:var(--gold)">↓</span></div>
+        </section>
+
+        <!-- ── SANGEET HERO ── -->
+        <section id="sangeet-hero">
+            <div class="sangeet-glow"></div>
+
+            <div class="s-badge" id="sb1">🎵 THE NIGHT BEFORE THE BIG DAY</div>
+            <div class="disco" id="disco">🪩</div>
+            <div class="s-main-title" id="smt">SANGEET<br>NIGHT</div>
+            <div style="margin-top:18px;text-align:center">
+                <div class="s-date-big" id="sdb">04</div>
+                <div class="s-month" id="smn">July 2026</div>
+                <div class="s-detail" id="sdtl">Saturday Evening · 8:30 PM onwards · Nashik</div>
+            </div>
+
+            <div class="countdown-label-sangeet" id="sct-lbl">⏰ SANGEET STARTS IN</div>
+            <div class="sgrid">
+                <div class="sc" id="scd"><span class="sc-num" id="sd-d">--</span>
+                    <div class="sc-lbl">DAYS</div>
+                </div>
+                <div class="sc" id="sch"><span class="sc-num" id="sd-h">--</span>
+                    <div class="sc-lbl">HOURS</div>
+                </div>
+                <div class="sc" id="scm"><span class="sc-num" id="sd-m">--</span>
+                    <div class="sc-lbl">MINS</div>
+                </div>
+                <div class="sc" id="scs"><span class="sc-num" id="sd-s">--</span>
+                    <div class="sc-lbl">SECS</div>
+                </div>
+            </div>
+
+
+
+
+            <!-- ── EVENTS ── -->
+            <section id="events-section">
+                <span class="sec-title" id="ev-t">The Full Celebrations</span>
+                <span class="sec-sub" id="ev-s">Three evenings of pure joy — don't miss a single one!</span>
+                <div class="tl" id="tl">
+                    <div class="tl-line" id="tll"></div>
+                    <div class="tev" id="te1">
+                        <div class="tev-icon" style="border-color:#e040fb;background:rgba(124,45,189,.12)">🪔</div>
+                        <div class="tev-card" onclick="this.classList.toggle('open')">
+                            <div class="tev-dt" style="color:#e040fb">SATURDAY · 4 JULY 2026</div>
+                            <div class="tev-nm" style="color:#e040fb">Simant Pujan</div>
+                            <div class="tev-tm">Evening · 7:00 PM</div>
+                            <div class="tev-note">Traditional blessings for the couple on the eve of the big day.
+                                Family,
+                                flowers, love and joy!</div>
+                        </div>
+                    </div>
+                    <div class="tev" id="te2">
+                        <div class="tev-icon" style="border-color:var(--sangeet2);background:rgba(124,45,189,.15)">🎶
+                        </div>
+                        <div class="tev-card" onclick="this.classList.toggle('open')"
+                            style="border-color:rgba(224,64,251,.2);box-shadow:0 0 20px rgba(124,45,189,.1)">
+                            <div class="tev-dt" style="color:var(--sangeet2)">SATURDAY · 4 JULY 2026</div>
+                            <div class="tev-nm" style="color:var(--sangeet2)">✨ Sangeet Night</div>
+                            <div class="tev-tm">8:30 PM — Dance shoes ON! 💃🕺</div>
+                            <div class="tev-note">THE night of music, dancing & pure magic. Performances, live music,
+                                surprises & the best party of the year. Come ready to groove! 🎉</div>
+                        </div>
+                    </div>
+                    <div class="tev" id="te3">
+                        <div class="tev-icon" style="border-color:var(--gold);background:rgba(232,160,32,.1)">💍</div>
+                        <div class="tev-card" onclick="this.classList.toggle('open')">
+                            <div class="tev-dt" style="color:var(--gold)">SUNDAY · 5 JULY 2026</div>
+                            <div class="tev-nm text-gold" style="color:var(--gold)">Shubh Vivah</div>
+                            <div class="tev-tm">Muhurat · 12:05 PM sharp!</div>
+                            <div class="tev-note">The beautiful ceremony as Viraj & Devaki take their vows. Followed by
+                                a
+                                lavish lunch — come hungry! 🍽️</div>
+                        </div>
+                    </div>
+                </div>
+                <p class="tev-tap">Tap any card to see details</p>
+            </section>
+
+
+            <!-- ── VENUE ── -->
+            <section id="venue-section">
+                <span class="sec-title" id="vn-t">Find Us Here</span>
+                <span class="sec-sub" id="vn-s">We're easy to find!</span>
+                <div class="v-card" id="vc">
+                    <div class="v-map">
+                        <div class="v-pin" onclick="openM()">📍</div>
+                    </div>
+                    <div class="v-body">
+                        <div class="v-name">Jai Shankar Festival Lawns</div>
+                        <div class="v-addr">Jejurkar Marg, Aurangabad Road<br>Near Panchavati · Nashik 422 003</div>
+                        <div class="v-btns">
+                            <a class="v-btn p" onclick="openM()">📍 Directions</a>
+                            <a class="v-btn" href="tel:+91XXXXXXXXXX">📞 Call</a>
+                            <a class="v-btn" href="https://wa.me/91XXXXXXXXXX" target="_blank">💬 WhatsApp</a>
+                        </div>
+                        <div
+                            style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.05);font-family:'DM Sans';font-size:.76rem;color:rgba(255,255,255,.35);line-height:1.9">
+                            🅿️ Ample parking available &nbsp;·&nbsp; 🚌 5 min from CBS Nashik
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ── PARENTS ── -->
+            <section style="min-height:auto;padding:56px 24px;background:#0a0503">
+                <span class="sec-title" id="pr-t">With Blessings Of</span>
+                <div
+                    style="display:flex;gap:clamp(14px,3vw,40px);flex-wrap:wrap;justify-content:center;margin-top:28px;max-width:520px">
+                    <div class="glass" style="flex:1;min-width:190px;padding:22px;text-align:center;opacity:0" id="pc1">
+                        <div
+                            style="font-family:'Bebas Neue';letter-spacing:.2em;font-size:.62rem;color:var(--teal);margin-bottom:8px">
+                            GROOM'S FAMILY</div>
+                        <div style="font-family:'Lora';font-size:.82rem;color:rgba(255,255,255,.75);line-height:1.85">
+                            <span style="font-style:italic;color:rgba(255,255,255,.35)">Late Mr. Arvind
+                                Nene</span><br>&
+                            Mrs. Shubhangi Nene
+                        </div>
+                    </div>
+                    <div class="glass" style="flex:1;min-width:190px;padding:22px;text-align:center;opacity:0" id="pc2">
+                        <div
+                            style="font-family:'Bebas Neue';letter-spacing:.2em;font-size:.62rem;color:var(--gold);margin-bottom:8px">
+                            BRIDE'S FAMILY</div>
+                        <div style="font-family:'Lora';font-size:.82rem;color:rgba(255,255,255,.75);line-height:1.85">
+                            Mr. Vivek Dharap<br><span style="font-style:italic;color:rgba(255,255,255,.35)">& Late Mrs.
+                                Vaishali Dharap</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ── CLOSING ── -->
+            <section id="closing-section">
+                <div id="lan-wrap" style="position:absolute;inset:0;pointer-events:none;overflow:hidden"></div>
+                <div id="fw-wrap" style="position:absolute;inset:0;pointer-events:none;overflow:hidden"></div>
+                <div style="text-align:center;position:relative;z-index:2">
+                    <div style="font-size:2.8rem;animation:hb 1.5s infinite;margin-bottom:20px">❤️</div>
+                    <div class="cl-txt" id="clt">We Can't Wait To<br>Celebrate With You</div>
+                    <div class="cl-sub" id="cls">With all our love — Viraj & Devaki · 5th July 2026 · Nashik</div>
+                    <div class="div-line" style="margin-top:36px"></div>
+                    <div style="margin-top:20px;opacity:0" id="clf">
+                        <p
+                            style="font-family:'Lora';font-style:italic;font-size:.82rem;color:rgba(255,255,255,.4);line-height:2">
+                            Smt. Shubhangi Nene & the Nene Family<br>Shri Vivek Dharap & the Dharap Family
+                        </p>
+                    </div>
+                    <div
+                        style="margin-top:28px;font-family:'Bebas Neue';letter-spacing:.22em;font-size:.65rem;color:rgba(232,160,32,.35)">
+                        ✦ 4–5 JULY 2026 · NASHIK ✦</div>
+                </div>
+            </section>
+
+    </div><!-- /main-site -->
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        /* ═══ CURSOR ═══ */
+        const cur = document.getElementById('cursor'), ctr = document.getElementById('cursor-trail');
+        let mx = 0, my = 0, tx = 0, ty = 0, lastSp = 0;
+        document.addEventListener('mousemove', e => {
+            mx = e.clientX; my = e.clientY;
+            cur.style.left = mx + 'px'; cur.style.top = my + 'px';
+            if (Date.now() - lastSp > 55) { lastSp = Date.now(); mkSp(mx, my); }
+        });
+        setInterval(() => { tx += (mx - tx) * .12; ty += (my - ty) * .12; ctr.style.left = tx + 'px'; ctr.style.top = ty + 'px' }, 16);
+        function mkSp(x, y) {
+            const s = document.createElement('div');
+            s.style.cssText = `position:fixed;left:${x}px;top:${y}px;pointer-events:none;z-index:9990;font-size:.65rem;transform:translate(-50%,-50%);animation:sparkOut .55s ease-out forwards;color:rgba(232,160,32,.7)`;
+            s.textContent = ['✦', '✧', '⋆', '•'][Math.floor(Math.random() * 4)];
+            document.body.appendChild(s);
+            setTimeout(() => s.remove(), 600);
+        }
+        const styleEl = document.createElement('style');
+        styleEl.textContent = '@keyframes sparkOut{from{opacity:1;transform:translate(-50%,-50%) scale(1)}to{opacity:0;transform:translate(-50%,-70px) scale(0)}}';
+        document.head.appendChild(styleEl);
+
+        document.addEventListener('click', e => {
+            const r = document.createElement('div'); r.className = 'rip';
+            r.style.cssText = `left:${e.clientX}px;top:${e.clientY}px`;
+            document.body.appendChild(r); setTimeout(() => r.remove(), 800);
+        });
+
+        /* ═══ PETALS ═══ */
+        function mkPetal() {
+            const p = document.createElement('div'); p.className = 'petal';
+            const em = ['🌸', '🌺', '🌼', '💐', '🪷'];
+            p.textContent = em[Math.floor(Math.random() * em.length)];
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.animationDuration = (7 + Math.random() * 10) + 's';
+            p.style.animationDelay = (Math.random() * 3) + 's';
+            p.style.fontSize = (.75 + Math.random() * .7) + 'rem';
+            document.body.appendChild(p);
+            setTimeout(() => p.remove(), 20000);
+        }
+        setInterval(mkPetal, 3000);
+
+        /* ═══ ENVELOPE ═══ */
+        let envDone = false;
+        function openEnv() {
+            if (envDone) return; envDone = true;
+            if (navigator.vibrate) navigator.vibrate([30, 20, 30]);
+            document.getElementById('env-wrap').style.animation = 'none';
+            const seal = document.getElementById('wax-seal');
+            gsap.to(seal, {
+                scale: 1.4, duration: .15, yoyo: true, repeat: 1, onComplete: () => {
+                    sealBurst(seal); gsap.to(seal, { opacity: 0, scale: 2.5, duration: .3 });
+                }
+            });
+            setTimeout(() => document.getElementById('env-flap').classList.add('open'), 280);
+            setTimeout(() => document.getElementById('env-card').classList.add('up'), 850);
+            setTimeout(() => {
+                gsap.to('#envelope-screen', {
+                    opacity: 0, duration: .55, onComplete: () => {
+                        document.getElementById('envelope-screen').style.display = 'none';
+                        showCeleb();
+                    }
+                });
+            }, 1700);
+        }
+        function sealBurst(el) {
+            const r = el.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+            for (let i = 0; i < 18; i++) {
+                const p = document.createElement('div');
+                const a = Math.random() * Math.PI * 2, d = 40 + Math.random() * 70;
+                p.style.cssText = `position:fixed;left:${cx}px;top:${cy}px;width:6px;height:6px;background:${['#cc2b2b', '#e8a020', '#fff', '#e040fb'][Math.floor(Math.random() * 4)]};border-radius:50%;pointer-events:none;z-index:200`;
+                document.body.appendChild(p);
+                gsap.to(p, { x: Math.cos(a) * d, y: Math.sin(a) * d, opacity: 0, scale: 0, duration: .5 + Math.random() * .4, ease: 'power2.out', onComplete: () => p.remove() });
+            }
+        }
+
+        /* ═══ CELEBRATION ═══ */
+        function showCeleb() {
+            const cel = document.getElementById('celebration'), txt = document.getElementById('inv-txt');
+            gsap.set(cel, { opacity: 1 });
+            cel.style.background = 'radial-gradient(ellipse 80% 60% at 50% 50%,rgba(124,45,189,.35),rgba(0,0,0,.96))';
+            for (let i = 0; i < 70; i++)spawnConf(cel);
+            gsap.to(txt, { opacity: 1, scale: 1, duration: .55, ease: 'back.out(2)', delay: .1 });
+            setTimeout(() => gsap.to(cel, { opacity: 0, duration: .7, delay: .4, onComplete: () => { cel.style.display = 'none'; launchMain(); } }), 2000);
+        }
+        function spawnConf(parent) {
+            const c = document.createElement('div'); c.className = 'conf';
+            const cols = ['#cc2b2b', '#e8a020', '#1a7a6e', '#2d3580', '#fff', '#e040fb', '#f5c842'];
+            c.style.cssText = `left:${20 + Math.random() * 60}%;top:-20px;background:${cols[Math.floor(Math.random() * cols.length)]};border-radius:${Math.random() > .5 ? '50%' : '2px'}`;
+            parent.appendChild(c);
+            gsap.to(c, { y: window.innerHeight + 40, x: (Math.random() - .5) * 320, rotation: Math.random() * 720, duration: 2 + Math.random() * 2, ease: 'power1.in', opacity: 0, onComplete: () => c.remove() });
+        }
+
+        /* ═══ LAUNCH MAIN ═══ */
+        function launchMain() {
+            document.getElementById('main-site').classList.add('active');
+            document.getElementById('nav').classList.add('show');
+            document.getElementById('mp').classList.add('show');
+            startCountdowns(); initScrollAnims(); spawnSparkles();
+            setTimeout(animNames, 200);
+            initSongVote(); initDanceChallenge(); initWishWall();
+        }
+
+        /* ═══ HERO NAMES ═══ */
+        function animNames() {
+            function reveal(id, txt) {
+                const el = document.getElementById(id); el.innerHTML = '';
+                txt.split('').forEach((c, i) => {
+                    const s = document.createElement('span'); s.className = 'nc'; s.textContent = c; el.appendChild(s);
+                    gsap.to(s, { opacity: 1, y: 0, duration: .38, delay: i * .06, ease: 'back.out(2)' });
+                });
+            }
+            reveal('ng', 'Viraj');
+            setTimeout(() => { gsap.to('#hrt', { opacity: 1, scale: [0, 1.2, 1], duration: .5 }); reveal('nb', 'Devaki'); }, 480);
+            setTimeout(() => gsap.to('#wp', { opacity: 1, duration: .4 }), 960);
+            setTimeout(() => gsap.to('#ht', { opacity: 1, duration: .4 }), 1160);
+        }
+        function spawnSparkles() {
+            const w = document.getElementById('sparkles');
+            [[12, 22], [82, 28], [8, 62], [88, 68], [50, 12], [22, 78], [72, 82]].forEach(([x, y], i) => {
+                const s = document.createElement('div');
+                s.style.cssText = `position:absolute;left:${x}%;top:${y}%;font-size:1.1rem;animation:sparkleFloat ${2.5 + i * .3}s ease-in-out ${i * .35}s infinite;opacity:0;pointer-events:none;color:var(--gold)`;
+                s.textContent = ['✦', '✧', '⋆', '★', '✨'][i % 5];
+                w.appendChild(s);
+            });
+            const sf = document.createElement('style');
+            sf.textContent = '@keyframes sparkleFloat{0%,100%{opacity:0;transform:translateY(0) scale(0)}40%,60%{opacity:1;transform:translateY(-18px) scale(1)}}';
+            document.head.appendChild(sf);
+        }
+
+        /* ═══ COUNTDOWNS ═══ */
+        function startCountdowns() {
+            // Sangeet: 4 July 2026 8:30pm IST
+            const sangeet = new Date('2026-07-04T20:30:00+05:30');
+            function tickS() {
+                const diff = sangeet - new Date();
+                const fmt = n => String(Math.max(0, Math.floor(n))).padStart(2, '0');
+                if (diff <= 0) { ['sd-d', 'sd-h', 'sd-m', 'sd-s'].forEach(id => document.getElementById(id).textContent = '00'); return; }
+                document.getElementById('sd-d').textContent = fmt(diff / 864e5);
+                document.getElementById('sd-h').textContent = fmt((diff % 864e5) / 36e5);
+                document.getElementById('sd-m').textContent = fmt((diff % 36e5) / 6e4);
+                document.getElementById('sd-s').textContent = fmt((diff % 6e4) / 1e3);
+            }
+            tickS(); setInterval(tickS, 1000);
+        }
+
+        /* ═══ SONG VOTE ═══ */
+        const songs = [
+            { title: 'Ek Do Teen', icon: '🎵', votes: 18 },
+            { title: 'Nagada Sang Dhol', icon: '🥁', votes: 24 },
+            { title: 'Gallan Goodiyaan', icon: '🎉', votes: 31 },
+            { title: 'London Thumakda', icon: '💃', votes: 15 },
+            { title: 'Badri Ki Dulhania', icon: '🎶', votes: 12 },
+            { title: 'Dilbar Dilbar', icon: '🔥', votes: 22 },
+        ];
+        let myVote = -1;
+        function initSongVote() {
+            const wrap = document.getElementById('sv-songs');
+            songs.forEach((s, i) => {
+                const d = document.createElement('div'); d.className = 'sv-song'; d.id = 'sv' + i;
+                d.innerHTML = `<span class="sv-icon">${s.icon}</span><div style="flex:1"><div>${s.title}</div><div class="sv-bar"><div class="sv-bar-fill" id="svb${i}"></div></div><div class="sv-votes" id="svc${i}">${s.votes} votes</div></div>`;
+                d.onclick = () => voteSong(i);
+                wrap.appendChild(d);
+            });
+            updateBars();
+        }
+        function voteSong(i) {
+            if (myVote === i) return;
+            if (myVote >= 0) { songs[myVote].votes--; document.getElementById('sv' + myVote).classList.remove('voted'); }
+            myVote = i; songs[i].votes++;
+            document.getElementById('sv' + i).classList.add('voted');
+            updateBars();
+            document.getElementById('sv-note').textContent = '✅ Vote recorded! We\'ll tell the DJ 🎵';
+        }
+        function updateBars() {
+            const max = Math.max(...songs.map(s => s.votes));
+            songs.forEach((s, i) => {
+                document.getElementById('svc' + i).textContent = s.votes + ' votes';
+                setTimeout(() => document.getElementById('svb' + i).style.width = (s.votes / max * 100) + '%', 50);
+            });
+        }
+
+        /* ═══ DANCE CHALLENGE ═══ */
+        const moves = [
+            { label: '🕺 Bollywood King', msg: 'You were BORN for Bollywood! You\'re the life of the party 🎉' },
+            { label: '💃 Classical Queen', msg: 'Graceful & beautiful — the whole crowd will stop to watch you 🌸' },
+            { label: '😄 Dad Dance Pro', msg: 'You\'ve got the legendary moves — everyone loves the Dad Dance! 🤣' },
+            { label: '🧒 Little Superstar', msg: 'The cutest dancer in the room — steal the show, little one! ⭐' },
+            { label: '🎤 Just Watching', msg: 'Great taste — watching the show and vibing is totally valid! 😄' },
+        ];
+        function initDanceChallenge() {
+            const wrap = document.getElementById('dc-moves');
+            moves.forEach((m, i) => {
+                const b = document.createElement('div'); b.className = 'dc-move'; b.textContent = m.label;
+                b.onclick = () => {
+                    document.querySelectorAll('.dc-move').forEach(el => el.classList.remove('picked'));
+                    b.classList.add('picked');
+                    const r = document.getElementById('dc-result');
+                    r.textContent = m.msg;
+                    r.style.color = 'rgba(255,255,255,.8)';
+                    if (navigator.vibrate) navigator.vibrate(50);
+                };
+                wrap.appendChild(b);
+            });
+        }
+
+        /* ═══ QUIZ ═══ */
+        let qScore = 0;
+        const feedbacks = {
+            right: ['🎉 Correct!', '✅ You got it!', '💯 Nailed it!', '🌟 Exactly right!'],
+            wrong: ['😅 Not quite!', '❌ Oops! Wrong one.', '💭 Try to remember next time!', '🤔 So close!']
+        };
+        function ans(btn, qi, correct) {
+            const opts = btn.parentElement.querySelectorAll('.q-opt');
+            opts.forEach(o => o.disabled = true);
+            btn.classList.add(correct ? 'correct' : 'wrong');
+            if (correct) qScore++;
+            const fbs = correct ? feedbacks.right : feedbacks.wrong;
+            document.getElementById('qf' + qi).textContent = fbs[Math.floor(Math.random() * fbs.length)];
+            document.getElementById('qn' + qi).style.display = 'inline-block';
+            if (correct && navigator.vibrate) navigator.vibrate([30, 10, 30]);
+        }
+        function nextQ(qi) {
+            document.getElementById('q' + (qi - 1)).classList.remove('active');
+            document.getElementById('q' + qi).classList.add('active');
+        }
+        function showScore() {
+            document.getElementById('q3').classList.remove('active');
+            document.getElementById('qres').classList.add('active');
+            document.getElementById('q-score-num').textContent = qScore;
+            const msgs = ['😅 No worries — just come and celebrate!', '😊 Not bad! You know them a little!', '🎉 Good job! You\'re a real friend!', '🌟 Perfect score! You\'re their BIGGEST fan!'];
+            document.getElementById('q-msg').textContent = msgs[qScore];
+            if (qScore === 4) for (let i = 0; i < 40; i++)setTimeout(() => spawnConf(document.getElementById('celebration') || document.body), i * 60);
+        }
+        function restartQuiz() {
+            qScore = 0;
+            document.querySelectorAll('.q-step').forEach(s => s.classList.remove('active'));
+            document.getElementById('q0').classList.add('active');
+            document.querySelectorAll('.q-opt').forEach(o => { o.disabled = false; o.classList.remove('correct', 'wrong'); });
+            document.querySelectorAll('.q-feedback').forEach(f => f.textContent = '');
+            document.querySelectorAll('.q-next').forEach(b => b.style.display = 'none');
+        }
+
+        /* ═══ WISH WALL ═══ */
+        const preWishes = [
+            { name: 'Aai & Baba', emoji: '❤️', msg: 'Our blessings and love always. May your bond grow stronger every day!' },
+            { name: 'Anjali', emoji: '🎉', msg: 'So happy for you both!! Can\'t wait to dance at Sangeet 💃' },
+            { name: 'Rohit Kaka', emoji: '💐', msg: 'Wishing you a lifetime of happiness and togetherness!' },
+        ];
+        function initWishWall() {
+            preWishes.forEach(w => addWishCard(w.name, w.emoji, w.msg));
+        }
+        function addWish() {
+            const nm = document.getElementById('w-name').value.trim();
+            const msg = document.getElementById('w-msg').value.trim();
+            const em = document.getElementById('w-emoji').value;
+            if (!nm || !msg) { alert('Please enter your name and wish! 😊'); return; }
+            addWishCard(nm, em, msg);
+            document.getElementById('w-name').value = '';
+            document.getElementById('w-msg').value = '';
+            for (let i = 0; i < 25; i++)setTimeout(() => {
+                const c = document.createElement('div'); c.className = 'conf';
+                const cols = ['#cc2b2b', '#e8a020', '#1a7a6e', '#e040fb', '#fff'];
+                c.style.cssText = `position:fixed;left:${30 + Math.random() * 40}%;top:60%;background:${cols[Math.floor(Math.random() * cols.length)]};z-index:9000;border-radius:50%`;
+                document.body.appendChild(c);
+                gsap.to(c, { y: -(80 + Math.random() * 120), x: (Math.random() - .5) * 150, opacity: 0, duration: .9 + Math.random() * .5, ease: 'power2.out', onComplete: () => c.remove() });
+            }, i * 40);
+        }
+        function addWishCard(name, emoji, msg) {
+            const rot = (Math.random() - .5) * 3;
+            const card = document.createElement('div'); card.className = 'wish-card';
+            card.style.setProperty('--rot', rot + 'deg');
+            card.innerHTML = `<div class="wc-emoji">${emoji}</div><div class="wc-msg">${msg}</div><div class="wc-name">${name}</div>`;
+            document.getElementById('wish-wall').prepend(card);
+        }
+
+        /* ═══ RSVP ═══ */
+        let radV = 'y';
+        function srad(v) {
+            radV = v;
+            document.getElementById('ry').classList.toggle('sel', v === 'y');
+            document.getElementById('rn').classList.toggle('sel', v === 'n');
+        }
+        function submitR() {
+            const nm = document.getElementById('ri-n').value.trim();
+            if (!nm) { document.getElementById('ri-n').focus(); return; }
+            document.getElementById('rf-wrap').style.display = 'none';
+            document.getElementById('r-thanks').style.display = 'block';
+            for (let i = 0; i < 50; i++)setTimeout(() => {
+                const c = document.createElement('div'); c.className = 'conf';
+                const rw = document.getElementById('rsvp-wrap').getBoundingClientRect();
+                const cols = ['#cc2b2b', '#e8a020', '#1a7a6e', '#2d3580', '#e040fb', '#fff'];
+                c.style.cssText = `position:fixed;left:${rw.left + rw.width / 2}px;top:${rw.top + 50}px;background:${cols[Math.floor(Math.random() * cols.length)]};z-index:200;border-radius:50%`;
+                document.body.appendChild(c);
+                gsap.to(c, { x: (Math.random() - .5) * 200, y: -(60 + Math.random() * 160), opacity: 0, rotation: Math.random() * 720, duration: 1 + Math.random(), ease: 'power1.out', onComplete: () => c.remove() });
+            }, i * 30);
+        }
+
+        /* ═══ VENUE ═══ */
+        function openM() { window.open('https://maps.google.com?q=Jai+Shankar+Festival+Lawns+Nashik', '_blank') }
+
+        /* ═══ MUSIC ═══ */
+        let playing = false, actx = null;
+        function toggleMusic() {
+            playing = !playing;
+            const pb = document.getElementById('pbtn'), vy = document.getElementById('vinyl');
+            const bars = document.querySelectorAll('.eqb div');
+            if (playing) { pb.textContent = '⏸'; vy.classList.add('on'); bars.forEach(b => b.classList.add('on')); playTone(); }
+            else { pb.textContent = '▶'; vy.classList.remove('on'); bars.forEach(b => b.classList.remove('on')); if (actx) { actx.close(); actx = null; } }
+        }
+        function playTone() {
+            try {
+                actx = new (window.AudioContext || window.webkitAudioContext)();
+                const seq = [261, 329, 392, 523, 392, 329, 261, 392, 523, 659, 523, 392];
+                let t = 0;
+                seq.forEach(f => {
+                    const o = actx.createOscillator(), g = actx.createGain();
+                    o.connect(g); g.connect(actx.destination);
+                    o.type = 'sine'; o.frequency.setValueAtTime(f, actx.currentTime + t);
+                    g.gain.setValueAtTime(0, actx.currentTime + t);
+                    g.gain.linearRampToValueAtTime(.035, actx.currentTime + t + .08);
+                    g.gain.linearRampToValueAtTime(0, actx.currentTime + t + .5);
+                    o.start(actx.currentTime + t); o.stop(actx.currentTime + t + .55);
+                    t += .55;
+                });
+                setTimeout(() => { if (playing) playTone(); }, t * 1000 + 100);
+            } catch (e) { }
+        }
+
+        /* ═══ FIREWORKS ═══ */
+        function startFW() {
+            const wrap = document.getElementById('fw-wrap');
+            let fi = setInterval(() => {
+                const cx = 15 + Math.random() * 70, cy = 8 + Math.random() * 50;
+                const cols = ['#e8a020', '#cc2b2b', '#1a7a6e', '#fff', '#e040fb', '#f5c842'];
+                for (let i = 0; i < 22; i++) {
+                    const p = document.createElement('div');
+                    const a = Math.random() * Math.PI * 2, d = 60 + Math.random() * 90;
+                    const c = cols[Math.floor(Math.random() * cols.length)];
+                    p.style.cssText = `position:absolute;left:${cx}%;top:${cy}%;width:5px;height:5px;border-radius:50%;background:${c};pointer-events:none`;
+                    wrap.appendChild(p);
+                    gsap.to(p, { x: Math.cos(a) * d + 'px', y: Math.sin(a) * d + 'px', opacity: 0, duration: .7 + Math.random() * .5, ease: 'power2.out', onComplete: () => p.remove() });
+                }
+            }, 700);
+            setTimeout(() => clearInterval(fi), 10000);
+        }
+        function startLanterns() {
+            const wrap = document.getElementById('lan-wrap');
+            for (let i = 0; i < 10; i++)setTimeout(() => {
+                const l = document.createElement('div'); l.className = 'lantern';
+                l.textContent = ['🏮', '🪔', '✨', '🌟', '🎇'][i % 5];
+                l.style.cssText = `left:${5 + Math.random() * 90}%;bottom:-60px;animation-duration:${6 + Math.random() * 7}s;font-size:${1.4 + Math.random() * .8}rem`;
+                wrap.appendChild(l); setTimeout(() => l.remove(), 14000);
+            }, i * 550);
+        }
+
+        /* ═══ SCROLL ANIMATIONS ═══ */
+        function initScrollAnims() {
+            gsap.set('.sec-title', { opacity: 0, y: 28 });
+            gsap.set('.sec-sub', { opacity: 0, y: 18 });
+
+            const fu = (sel, delay = 0, trg) => gsap.to(sel, {
+                opacity: 1, y: 0, duration: .65, delay, ease: 'power2.out',
+                scrollTrigger: { trigger: trg || sel, start: 'top 86%', toggleActions: 'play none none none' }
+            });
+            const si = (sel, delay = 0, trg) => gsap.to(sel, {
+                opacity: 1, scale: 1, duration: .65, delay, ease: 'back.out(1.5)',
+                scrollTrigger: { trigger: trg || sel, start: 'top 86%', toggleActions: 'play none none none' }
+            });
+
+            // SANGEET section
+            gsap.to('#sb1', { opacity: 1, y: 0, duration: .5, scrollTrigger: { trigger: '#sangeet-hero', start: 'top 80%' } });
+            gsap.to('.disco', { opacity: 1, duration: .4, delay: .1, scrollTrigger: { trigger: '#sangeet-hero', start: 'top 80%' } });
+            gsap.to('#smt', { opacity: 1, scale: 1, duration: .8, delay: .15, ease: 'back.out(1.5)', scrollTrigger: { trigger: '#smt', start: 'top 85%' } });
+            gsap.to('#sdb', { opacity: 1, scale: 1, duration: .8, delay: .1, ease: 'back.out(1.5)', scrollTrigger: { trigger: '#sdb', start: 'top 85%' } });
+            gsap.to('#smn', { opacity: 1, x: 0, duration: .6, delay: .2, scrollTrigger: { trigger: '#smn', start: 'top 85%' } });
+            gsap.to('#sdtl', { opacity: 1, duration: .5, delay: .35, scrollTrigger: { trigger: '#sdtl', start: 'top 88%' } });
+            gsap.to('#sct-lbl', { opacity: 1, duration: .5, delay: .1, scrollTrigger: { trigger: '#countdown-section-sangeet', start: 'top 90%', id: 'sct' } });
+            ['scd', 'sch', 'scm', 'scs'].forEach((id, i) => gsap.to('#' + id, { opacity: 1, y: 0, duration: .45, delay: i * .1, ease: 'back.out(1.4)', scrollTrigger: { trigger: '#sct-lbl', start: 'top 85%' } }));
+            gsap.to('#song-vote', { opacity: 1, y: 0, duration: .6, delay: .1, scrollTrigger: { trigger: '#song-vote', start: 'top 86%' } });
+            gsap.to('#dance-challenge', { opacity: 1, y: 0, duration: .6, delay: .1, scrollTrigger: { trigger: '#dance-challenge', start: 'top 86%' } });
+
+            // Events
+            fu('.sec-title', '#events-section'); fu('.sec-sub', '#events-section');
+            gsap.to('#tll', { scaleY: 1, duration: 1.1, ease: 'power2.out', scrollTrigger: { trigger: '#tl', start: 'top 75%' } });
+            ['te1', 'te2', 'te3'].forEach((id, i) => gsap.to('#' + id, { opacity: 1, x: 0, duration: .55, delay: i * .14, ease: 'power2.out', scrollTrigger: { trigger: '#' + id, start: 'top 86%' } }));
+
+            // Quiz
+            fu('#qz-t'); fu('#qz-s');
+            gsap.to('#quiz-box', { opacity: 1, y: 0, duration: .65, delay: .15, ease: 'back.out(1.2)', scrollTrigger: { trigger: '#quiz-box', start: 'top 82%' } });
+
+            // Wish wall
+            fu('#ww-t'); fu('#ww-s');
+            gsap.to('#wiw', { opacity: 1, y: 0, duration: .65, delay: .15, scrollTrigger: { trigger: '#wiw', start: 'top 82%' } });
+
+            // RSVP
+            fu('#rv-t'); fu('#rv-s');
+            gsap.to('#rsvp-wrap', { opacity: 1, y: 0, duration: .65, delay: .15, ease: 'back.out(1.2)', scrollTrigger: { trigger: '#rsvp-wrap', start: 'top 82%' } });
+
+            // Venue
+            fu('#vn-t'); fu('#vn-s');
+            gsap.to('#vc', { opacity: 1, scale: 1, duration: .65, delay: .15, ease: 'back.out(1.4)', scrollTrigger: { trigger: '#vc', start: 'top 82%' } });
+
+            // Parents
+            fu('#pr-t');
+            gsap.to('#pc1', { opacity: 1, duration: .55, delay: .1, scrollTrigger: { trigger: '#pc1', start: 'top 88%' } });
+            gsap.to('#pc2', { opacity: 1, duration: .55, delay: .2, scrollTrigger: { trigger: '#pc2', start: 'top 88%' } });
+
+            // Closing
+            gsap.to('#clt', { opacity: 1, y: 0, duration: .75, scrollTrigger: { trigger: '#clt', start: 'top 80%', onEnter: () => { startFW(); startLanterns(); } } });
+            gsap.to('#cls', { opacity: 1, duration: .6, delay: .3, scrollTrigger: { trigger: '#cls', start: 'top 86%' } });
+            gsap.to('#clf', { opacity: 1, duration: .6, delay: .5, scrollTrigger: { trigger: '#clf', start: 'top 90%' } });
+
+            // Section titles generic
+            document.querySelectorAll('.sec-title').forEach(el =>
+                gsap.to(el, { opacity: 1, y: 0, duration: .6, scrollTrigger: { trigger: el, start: 'top 87%' } }));
+            document.querySelectorAll('.sec-sub').forEach(el =>
+                gsap.to(el, { opacity: 1, y: 0, duration: .5, delay: .08, scrollTrigger: { trigger: el, start: 'top 87%' } }));
+        }
+    </script>
+</body>
+
+</html>
